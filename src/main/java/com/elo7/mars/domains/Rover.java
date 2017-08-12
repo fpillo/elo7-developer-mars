@@ -31,6 +31,7 @@ public class Rover {
             return null;
         }
         position = newPosition;
+        mars.insertAt(new Point(newPosition.getX(), newPosition.getY()), this);
 
         return position;
     }

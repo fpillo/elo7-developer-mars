@@ -23,24 +23,20 @@ public class Position {
         this.cardinalPoint = CardinalPoint.valueOf(cardinal);
     }
 
-    public Integer addY() {
-        this.y = y + 1;
-        return y;
+    public Position addY() {
+        return new Position(x, y + 1, cardinalPoint.toString());
     }
 
-    public Integer subY() {
-        this.y = y - 1;
-        return y;
+    public Position subY() {
+        return new Position(x, y - 1, cardinalPoint.toString());
     }
 
-    public Integer addX() {
-        this.x = x + 1;
-        return x;
+    public Position addX() {
+        return new Position(x + 1,y, cardinalPoint.toString());
     }
 
-    public Integer subX() {
-        this.x = x - 1;
-        return x;
+    public Position subX() {
+        return new Position(x - 1, y, cardinalPoint.toString());
     }
 
 }

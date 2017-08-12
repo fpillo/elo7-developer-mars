@@ -25,27 +25,36 @@ public class Rover {
         return position;
     }
 
-    public Position walk() {
-        switch (position.getCardinalPoint()) {
-            case N: {
-                position.addY();
-                break;
-            }
-            case W: {
-                position.subX();
-                break;
-            }
-            case S: {
-                position.subY();
-                break;
-            }
-            case E: {
-                position.addX();
-                break;
-            }
+    public Position walk(final Mars mars) {
+        final Position newPosition = calculateNewPosition();
+        if (detectCollision(newPosition, mars)) {
+            return null;
         }
+        position = newPosition;
 
         return position;
+    }
+
+    private Position calculateNewPosition() {
+        switch (position.getCardinalPoint()) {
+            case N: {
+                return position.addY();
+            }
+            case W: {
+                return position.subX();
+            }
+            case S: {
+                return position.subY();
+            }
+            case E: {
+                return position.addX();
+            }
+            default: return null;
+        }
+    }
+
+    private boolean detectCollision(final Position position, final Mars mars) {
+        return mars.findRoverAt(new Point(position.getX(), position.getY())).isPresent();
     }
 
 }

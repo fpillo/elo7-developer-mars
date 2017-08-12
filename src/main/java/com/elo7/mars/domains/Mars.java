@@ -1,17 +1,16 @@
 package com.elo7.mars.domains;
 
+import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Vector;
 
 public class Mars {
 
-    private final Vector<Vector<Rover>> map;
+    private final ArrayList<ArrayList<Rover>> map;
 
-    public Mars(final Integer limitY, final Integer limitX) {
-        final Vector<Vector<Rover>> y = new Vector<>(limitY);
-        for(int i = 0; i < limitX; i++) {
-            final Vector<Rover> x = new Vector<>(limitX);
-            y.set(i, x);
+    public Mars(final Integer limitX, final Integer limitY) {
+        final ArrayList<ArrayList<Rover>> y = new ArrayList<>(limitY);
+        for(int i = 0; i < limitY; i++) {
+            y.add(createX(limitX));
         }
 
         this.map = y;
@@ -23,6 +22,14 @@ public class Mars {
 
     public Rover insertAt(final Point point, final Rover rover) {
         return map.get(point.getY()).set(point.getX(), rover);
+    }
+
+    private ArrayList<Rover> createX(final Integer limitX) {
+        final ArrayList<Rover> x = new ArrayList<>(limitX);
+        for (int i = 0; i < limitX; i++) {
+            x.add(null);
+        }
+        return x;
     }
 
 

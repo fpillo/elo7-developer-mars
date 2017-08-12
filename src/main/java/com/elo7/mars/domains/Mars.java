@@ -23,29 +23,22 @@ public class Mars {
     }
 
     public Optional<Rover> findRoverAt(final Point point) {
-        if (!isValidPoint(point)) {
-            throw new IllegalArgumentException();
-        }
+        isValidPoint(point);
         return Optional.ofNullable(map.get(point.getY()).get(point.getX()));
     }
 
     public Rover insertAt(final Point point, final Rover rover) {
-        if (!isValidPoint(point)) {
-            throw new IllegalArgumentException();
-        }
+        isValidPoint(point);
         return map.get(point.getY()).set(point.getX(), rover);
     }
 
-    private boolean isValidPoint(final Point point) {
+    private void isValidPoint(final Point point) {
         if (point.getY() < 0 || point.getX() < 0) {
-            return false;
+            throw new IllegalArgumentException();
         }
-
         if (point.getY() > limitY - 1 || point.getX() > limitX - 1) {
-            return false;
+            throw new IllegalArgumentException();
         }
-
-        return true;
     }
 
 

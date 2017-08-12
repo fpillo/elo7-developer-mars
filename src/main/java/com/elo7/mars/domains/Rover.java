@@ -27,7 +27,7 @@ public class Rover {
 
     public Position land(final Mars mars) {
         detectCollision(position, mars);
-        mars.insertAt(position.getPoint(), this);
+        mars.insertAt(this);
 
         return position;
     }
@@ -36,7 +36,7 @@ public class Rover {
         final Position newPosition = calculateNewPosition();
         detectCollision(newPosition, mars);
         position = newPosition;
-        mars.insertAt(newPosition.getPoint(), this);
+        mars.insertAt(this);
 
         return position;
     }

@@ -108,7 +108,7 @@ public class RoverTest {
     @Test(expected = IllegalArgumentException.class)
     public void test_walk_collision_detected() throws Exception {
         final Mars mars = new Mars(5,5);
-        mars.insertAt(new Point(1, 0), new Rover(new Position(1, 0, "N")));
+        mars.insertAt(new Rover(new Position(1, 0, "N")));
 
         final Rover rover = new Rover(new Position(0, 0, "E"));
         rover.walk(mars);

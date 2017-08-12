@@ -27,9 +27,9 @@ public class Mars {
         return Optional.ofNullable(map.get(point.getY()).get(point.getX()));
     }
 
-    public Rover insertAt(final Point point, final Rover rover) {
-        isValidPoint(point);
-        return map.get(point.getY()).set(point.getX(), rover);
+    public Rover insertAt(final Rover rover) {
+        isValidPoint(rover.getPosition().getPoint());
+        return map.get(rover.getPosition().getPoint().getY()).set(rover.getPosition().getPoint().getX(), rover);
     }
 
     private void isValidPoint(final Point point) {

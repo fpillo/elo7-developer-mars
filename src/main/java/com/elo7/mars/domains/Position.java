@@ -11,32 +11,29 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Position {
 
-    private Integer x;
-
-    private Integer y;
+    private Point point;
 
     private CardinalPoint cardinalPoint;
 
     public Position(final Integer x, final Integer y, final String cardinal) {
-        this.x = x;
-        this.y = y;
+        this.point = new Point(x, y);
         this.cardinalPoint = CardinalPoint.valueOf(cardinal);
     }
 
     public Position addY() {
-        return new Position(x, y + 1, cardinalPoint.toString());
+        return new Position(point.getX(), point.getY() + 1, cardinalPoint.toString());
     }
 
     public Position subY() {
-        return new Position(x, y - 1, cardinalPoint.toString());
+        return new Position(point.getX(), point.getY() - 1, cardinalPoint.toString());
     }
 
     public Position addX() {
-        return new Position(x + 1,y, cardinalPoint.toString());
+        return new Position(point.getX() + 1, point.getY(), cardinalPoint.toString());
     }
 
     public Position subX() {
-        return new Position(x - 1, y, cardinalPoint.toString());
+        return new Position(point.getX() - 1, point.getY(), cardinalPoint.toString());
     }
 
 }

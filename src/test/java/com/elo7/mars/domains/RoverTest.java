@@ -69,4 +69,36 @@ public class RoverTest {
         Assert.assertEquals("S", rover.getPosition().getCardinalPoint().toString());
     }
 
+    @Test
+    public void test_walk_looking_to_n() throws Exception {
+        final Rover rover = new Rover(new Position(0, 0, "N"));
+        rover.walk();
+
+        Assert.assertEquals(new Position(0, 1, "N"), rover.getPosition());
+    }
+
+    @Test
+    public void test_walk_looking_to_e() throws Exception {
+        final Rover rover = new Rover(new Position(0, 0, "E"));
+        rover.walk();
+
+        Assert.assertEquals(new Position(1, 0, "E"), rover.getPosition());
+    }
+
+    @Test
+    public void test_walk_looking_to_s() throws Exception {
+        final Rover rover = new Rover(new Position(0, 0, "S"));
+        rover.walk();
+
+        Assert.assertEquals(new Position(0, -1, "S"), rover.getPosition());
+    }
+
+    @Test
+    public void test_walk_looking_to_w() throws Exception {
+        final Rover rover = new Rover(new Position(0, 0, "W"));
+        rover.walk();
+
+        Assert.assertEquals(new Position(-1, 0, "W"), rover.getPosition());
+    }
+
 }

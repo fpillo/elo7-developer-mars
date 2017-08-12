@@ -21,6 +21,20 @@ public class MarsTest {
         Assert.assertEquals(false, mars.findRoverAt(new Point(2,3)).isPresent());
     }
 
+    @Test
+    public void test_insertAt_valid_point() throws Exception {
+        final Mars mars = createMars(5, 4);
+        final Rover rover = new Rover(new Position(2, 3, "N"));
+        mars.insertAt(new Point(2,3), rover);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void test_insertAt_invalid_point() throws Exception {
+        final Mars mars = createMars(5, 4);
+        final Rover rover = new Rover(new Position(5, 3, "N"));
+        mars.insertAt(new Point(5,3), rover);
+    }
+
     private Mars createMars(final Integer limitX, final Integer limitY) {
         return new Mars(limitX, limitY);
     }

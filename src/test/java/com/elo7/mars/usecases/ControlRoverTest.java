@@ -20,7 +20,7 @@ public class ControlRoverTest {
 
     @Before
     public void setUp() {
-        controlRover = new ControlRover(new Mars(10, 10));
+        controlRover = new ControlRover();
     }
 
     @Test
@@ -29,7 +29,7 @@ public class ControlRoverTest {
         final Collection<Command> commands = new ArrayList<>();
         commands.add(new MoveCommand());
 
-        controlRover.control(rover, commands);
+        controlRover.control(createMars(10, 10), rover, commands);
         Assert.assertEquals(new Position(0, 1, "N"), rover.getPosition());
     }
 
@@ -40,7 +40,7 @@ public class ControlRoverTest {
         commands.add(new TurnRightCommand());
         commands.add(new MoveCommand());
 
-        controlRover.control(rover, commands);
+        controlRover.control(createMars(10, 10), rover, commands);
         Assert.assertEquals(new Position(1, 0, "E"), rover.getPosition());
     }
 
@@ -53,8 +53,12 @@ public class ControlRoverTest {
         commands.add(new MoveCommand());
         commands.add(new TurnLeftCommand());
 
-        controlRover.control(rover, commands);
+        controlRover.control(createMars(10, 10), rover, commands);
         Assert.assertEquals(new Position(2, 0, "N"), rover.getPosition());
+    }
+
+    private Mars createMars(final Integer limitX, final Integer limitY) {
+        return new Mars(limitX, limitY);
     }
 
 }

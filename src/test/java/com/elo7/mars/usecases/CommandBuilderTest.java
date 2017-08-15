@@ -57,6 +57,11 @@ public class CommandBuilderTest {
         Assert.assertEquals("MLRRMM", getCommand(commands));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void test_build_invalid_F() throws Exception {
+        final Collection<Command> commands = commandBuilder.build("F");
+    }
+
     private String getCommand(final Collection<Command> commands) {
         final StringBuilder sb = new StringBuilder();
         final Iterator<Command> iterator = commands.iterator();

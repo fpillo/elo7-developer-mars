@@ -32,7 +32,7 @@ public class CommandBuilder {
             case 'R':
                 return new TurnRightCommand();
             default:
-                return null;
+                throw new IllegalArgumentException(String.format("Invalid command: %c", c));
         }
     }
 

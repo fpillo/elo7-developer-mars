@@ -25,13 +25,6 @@ public class Rover {
         return position;
     }
 
-    public Position land(final Mars mars) {
-        detectCollision(position, mars);
-        mars.insertAt(this);
-
-        return position;
-    }
-
     public Position walk(final Mars mars) {
         final Position newPosition = calculateNewPosition();
         detectCollision(newPosition, mars);

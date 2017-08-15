@@ -5,6 +5,8 @@ import com.elo7.mars.domains.Position;
 import com.elo7.mars.domains.Rover;
 import com.elo7.mars.domains.commands.Command;
 import com.elo7.mars.domains.commands.MoveCommand;
+import com.elo7.mars.domains.commands.TurnLeftCommand;
+import com.elo7.mars.domains.commands.TurnRightCommand;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +31,30 @@ public class ControlRoverTest {
 
         controlRover.control(rover, commands);
         Assert.assertEquals(new Position(0, 1, "N"), rover.getPosition());
+    }
+
+    @Test
+    public void test_control_turn_right_move() throws Exception {
+        final Rover rover = new Rover(new Position(0 ,0, "N"));
+        final Collection<Command> commands = new ArrayList<>();
+        commands.add(new TurnRightCommand());
+        commands.add(new MoveCommand());
+
+        controlRover.control(rover, commands);
+        Assert.assertEquals(new Position(1, 0, "E"), rover.getPosition());
+    }
+
+    @Test
+    public void test_control_turn_right_move_move_turn_left() throws Exception {
+        final Rover rover = new Rover(new Position(0 ,0, "N"));
+        final Collection<Command> commands = new ArrayList<>();
+        commands.add(new TurnRightCommand());
+        commands.add(new MoveCommand());
+        commands.add(new MoveCommand());
+        commands.add(new TurnLeftCommand());
+
+        controlRover.control(rover, commands);
+        Assert.assertEquals(new Position(2, 0, "N"), rover.getPosition());
     }
 
 }

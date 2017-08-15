@@ -9,4 +9,10 @@ public class TurnRightCommand implements Command {
     public void execute(final Rover rover, final Mars mars) {
         rover.turnRight();
     }
+
+    @Override
+    public String toString() {
+        return "R";
+    }
+
 }

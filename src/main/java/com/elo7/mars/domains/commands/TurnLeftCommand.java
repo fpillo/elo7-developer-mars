@@ -10,4 +10,9 @@ public class TurnLeftCommand implements Command {
         rover.turnLeft();
     }
 
+    @Override
+    public String toString() {
+        return "L";
+    }
+
 }

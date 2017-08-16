@@ -105,17 +105,6 @@ public class RoverTest {
         Assert.assertEquals(new Position(0, 0, "W"), rover.getPosition());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void test_walk_collision_detected() throws Exception {
-        final Mars mars = new Mars(5,5);
-        mars.insertAt(new Rover(new Position(1, 0, "N")));
-
-        final Rover rover = new Rover(new Position(0, 0, "E"));
-        rover.walk(mars);
-    }
-
-
-
     private Mars createMars(final Integer limitX, final Integer limitY) {
         return new Mars(limitX, limitY);
     }

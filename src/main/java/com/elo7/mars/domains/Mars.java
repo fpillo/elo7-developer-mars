@@ -33,10 +33,7 @@ public class Mars {
     }
 
     private void isValidPoint(final Point point) {
-        if (point.getY() < 0 || point.getX() < 0) {
-            throw new IllegalArgumentException();
-        }
-        if (point.getY() > limitY || point.getX() > limitX) {
+        if (point.getY() < 0 || point.getX() < 0 || point.getY() > limitY || point.getX() > limitX) {
             throw new IllegalArgumentException();
         }
     }

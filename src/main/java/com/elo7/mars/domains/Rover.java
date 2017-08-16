@@ -27,7 +27,6 @@ public class Rover {
 
     public Position walk(final Mars mars) {
         final Position newPosition = calculateNewPosition();
-        detectCollision(newPosition, mars);
         position = newPosition;
         mars.insertAt(this);
 
@@ -49,12 +48,6 @@ public class Rover {
                 return position.addX();
             }
             default: return null;
-        }
-    }
-
-    private void detectCollision(final Position position, final Mars mars) {
-        if (mars.findRoverAt(position.getPoint()).isPresent()) {
-            throw new IllegalArgumentException();
         }
     }
 

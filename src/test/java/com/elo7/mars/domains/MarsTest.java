@@ -31,7 +31,7 @@ public class MarsTest {
     @Test(expected = IllegalArgumentException.class)
     public void test_insertAt_invalid_point() throws Exception {
         final Mars mars = createMars(5, 4);
-        final Rover rover = new Rover(new Position(5, 3, "N"));
+        final Rover rover = new Rover(new Position(6, 4, "N"));
         mars.insertAt(rover);
     }
 

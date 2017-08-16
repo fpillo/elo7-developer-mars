@@ -13,7 +13,7 @@ public class Mars {
 
     public Mars(final Integer limitX, final Integer limitY) {
         final ArrayList<ArrayList<Rover>> y = new ArrayList<>(limitY);
-        for(int i = 0; i < limitY; i++) {
+        for(int i = 0; i <= limitY; i++) {
             y.add(createX(limitX));
         }
 
@@ -36,7 +36,7 @@ public class Mars {
         if (point.getY() < 0 || point.getX() < 0) {
             throw new IllegalArgumentException();
         }
-        if (point.getY() > limitY - 1 || point.getX() > limitX - 1) {
+        if (point.getY() > limitY || point.getX() > limitX) {
             throw new IllegalArgumentException();
         }
     }
@@ -44,7 +44,7 @@ public class Mars {
 
     private ArrayList<Rover> createX(final Integer limitX) {
         final ArrayList<Rover> x = new ArrayList<>(limitX);
-        for (int i = 0; i < limitX; i++) {
+        for (int i = 0; i <= limitX; i++) {
             x.add(null);
         }
         return x;

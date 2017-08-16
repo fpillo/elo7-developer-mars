@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Component
-public class ControlRover {
+public class ExecuteRovers {
 
     public Collection<Rover> control(final WorldContext worldContext) {
         final Collection<Rover> rovers = new ArrayList<>();

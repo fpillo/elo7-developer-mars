@@ -3,7 +3,7 @@ package com.elo7.mars.controllers;
 import com.elo7.mars.domains.Position;
 import com.elo7.mars.domains.Rover;
 import com.elo7.mars.domains.WorldContext;
-import com.elo7.mars.usecases.ControlRover;
+import com.elo7.mars.usecases.ExecuteRovers;
 import com.elo7.mars.usecases.CreateWorldContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,19 +21,19 @@ public class RoverController {
 
     private final CreateWorldContext createWorldContext;
 
-    private final ControlRover controlRover;
+    private final ExecuteRovers executeRovers;
 
     @Autowired
-    public RoverController(final CreateWorldContext createWorldContext, final ControlRover controlRover) {
+    public RoverController(final CreateWorldContext createWorldContext, final ExecuteRovers executeRovers) {
         this.createWorldContext = createWorldContext;
-        this.controlRover = controlRover;
+        this.executeRovers = executeRovers;
     }
 
     @PostMapping(consumes = MediaType.TEXT_PLAIN_VALUE)
     @ResponseStatus(code = HttpStatus.CREATED)
     public Collection<Position> start(@RequestBody final String input) {
         final WorldContext worldContext = createWorldContext.create(input);
-        final Collection<Rover> rovers = controlRover.control(worldContext);
+        final Collection<Rover> rovers = executeRovers.control(worldContext);
 
         return extract(rovers);
     }

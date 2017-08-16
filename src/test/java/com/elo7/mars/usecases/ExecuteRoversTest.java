@@ -17,13 +17,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ControlRoverTest {
+public class ExecuteRoversTest {
 
-    private ControlRover controlRover;
+    private ExecuteRovers executeRovers;
 
     @Before
     public void setUp() {
-        controlRover = new ControlRover();
+        executeRovers = new ExecuteRovers();
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ControlRoverTest {
         map.put(rover, commands);
         final WorldContext worldContext = new WorldContext(mars, map);
 
-        controlRover.control(worldContext);
+        executeRovers.control(worldContext);
         Assert.assertEquals(new Position(0, 1, "N"), rover.getPosition());
     }
 
@@ -51,7 +51,7 @@ public class ControlRoverTest {
         map.put(rover, commands);
         final WorldContext worldContext = new WorldContext(mars, map);
 
-        controlRover.control(worldContext);
+        executeRovers.control(worldContext);
         Assert.assertEquals(new Position(1, 0, "E"), rover.getPosition());
     }
 
@@ -68,7 +68,7 @@ public class ControlRoverTest {
         map.put(rover, commands);
         final WorldContext worldContext = new WorldContext(mars, map);
 
-        controlRover.control(worldContext);
+        executeRovers.control(worldContext);
         Assert.assertEquals(new Position(2, 0, "N"), rover.getPosition());
     }
 

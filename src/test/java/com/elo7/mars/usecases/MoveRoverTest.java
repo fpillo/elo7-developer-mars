@@ -15,6 +15,7 @@ import com.elo7.mars.domains.commands.Command;
 import com.elo7.mars.domains.commands.MoveCommand;
 import com.elo7.mars.domains.commands.TurnLeftCommand;
 import com.elo7.mars.domains.commands.TurnRightCommand;
+import com.elo7.mars.exceptions.CollisionException;
 import com.elo7.mars.exceptions.RouverNotFoundException;
 
 public class MoveRoverTest {
@@ -72,6 +73,19 @@ public class MoveRoverTest {
     @Test(expected = RouverNotFoundException.class)
     public void test_move_invalid_rouver() throws Exception {
         final Rover rover = new Rover(UUID.randomUUID(), new Position(0 ,0, "N"));
+
+        final Collection<Command> commands = new ArrayList<>();
+        commands.add(new TurnRightCommand());
+        commands.add(new MoveCommand(mars));
+
+        moveRover.move(rover.getUuid(), commands);
+    }
+
+    @Test(expected = CollisionException.class)
+    public void test_move_collision() throws Exception {
+        mars.insertAt(new Rover(UUID.randomUUID(), new Position(1 ,0, "E")));
+        final Rover rover = new Rover(UUID.randomUUID(), new Position(0 ,0, "N"));
+        mars.insertAt(rover);
 
         final Collection<Command> commands = new ArrayList<>();
         commands.add(new TurnRightCommand());

@@ -37,6 +37,7 @@ public class Mars {
     }
 
     public Rover removeAt(final Rover rover) {
+        roverMap.remove(rover);
         return pointMap.remove(rover.getPosition().getPoint());
     }
 

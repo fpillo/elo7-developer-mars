@@ -1,45 +1,50 @@
 package com.elo7.mars.controllers;
 
-import com.elo7.mars.domains.Position;
-import com.elo7.mars.domains.Rover;
-import com.elo7.mars.domains.WorldContext;
-import com.elo7.mars.usecases.ExecuteRovers;
-import com.elo7.mars.usecases.CreateWorldContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
+import com.elo7.mars.controllers.json.LaunchRoverJson;
+import com.elo7.mars.controllers.json.MoveRoverJson;
+import com.elo7.mars.domains.Position;
+import com.elo7.mars.domains.Rover;
+import com.elo7.mars.usecases.CommandBuilder;
+import com.elo7.mars.usecases.LaunchRover;
+import com.elo7.mars.usecases.MoveRover;
 
 @RestController
 public class RoverController {
 
-    private final CreateWorldContext createWorldContext;
+    private final LaunchRover launchRover;
 
-    private final ExecuteRovers executeRovers;
+    private final MoveRover moveRover;
+
+    private final CommandBuilder commandBuilder;
 
     @Autowired
-    public RoverController(final CreateWorldContext createWorldContext, final ExecuteRovers executeRovers) {
-        this.createWorldContext = createWorldContext;
-        this.executeRovers = executeRovers;
+    public RoverController(final LaunchRover launchRover, final MoveRover moveRover, final CommandBuilder commandBuilder) {
+        this.launchRover = launchRover;
+        this.moveRover = moveRover;
+        this.commandBuilder = commandBuilder;
     }
 
-    @PostMapping(consumes = MediaType.TEXT_PLAIN_VALUE)
+    @PostMapping(value = "/rovers", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Collection<Position> start(@RequestBody final String input) {
-        final WorldContext worldContext = createWorldContext.create(input);
-        final Collection<Rover> rovers = executeRovers.control(worldContext);
-
-        return extract(rovers);
+    public Rover launch(@RequestBody final LaunchRoverJson launchRoverJson) {
+        final Position position = new Position(launchRoverJson.getX(), launchRoverJson.getY(), launchRoverJson.getCardinal());
+        return launchRover.launch(position);
     }
 
-    private final Collection<Position> extract(final Collection<Rover> rovers) {
-        return rovers.stream().map(Rover::getPosition).collect((Collectors.toList()));
+    @PutMapping(value = "/rovers", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(code = HttpStatus.OK)
+    public Rover move(@RequestBody final MoveRoverJson moveRoverJson) {
+        return moveRover.move(moveRoverJson.getUuid(), commandBuilder.build(moveRoverJson.getCommand()));
     }
+
 
 }

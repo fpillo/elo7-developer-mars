@@ -1,5 +1,7 @@
 package com.elo7.mars.domains;
 
+import java.util.UUID;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,9 +11,12 @@ import lombok.ToString;
 @ToString
 public class Rover {
 
+    private UUID uuid;
+
     private Position position;
 
-    public Rover(final Position position) {
+    public Rover(final UUID uuid, final Position position) {
+        this.uuid = uuid;
         this.position = position;
     }
 
@@ -22,6 +27,11 @@ public class Rover {
 
     public Position turnLeft() {
         position.setCardinalPoint(position.getCardinalPoint().turnLeft());
+        return position;
+    }
+
+    public Position launch(final Mars mars) {
+        mars.insertAt(this);
         return position;
     }
 

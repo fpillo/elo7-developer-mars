@@ -1,9 +1,14 @@
 package com.elo7.mars.domains;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 public class Mars {
+
+    private final Map<UUID, Rover> roverMap = new HashMap<>();
 
     private final ArrayList<ArrayList<Rover>> map;
 
@@ -27,8 +32,13 @@ public class Mars {
         return Optional.ofNullable(map.get(point.getY()).get(point.getX()));
     }
 
+    public Optional<Rover> findRoverByUuid(final UUID uuid) {
+        return Optional.ofNullable(roverMap.get(uuid));
+    }
+
     public Rover insertAt(final Rover rover) {
         isValidPoint(rover.getPosition().getPoint());
+        roverMap.put(rover.getUuid(), rover);
         return map.get(rover.getPosition().getPoint().getY()).set(rover.getPosition().getPoint().getX(), rover);
     }
 

@@ -1,6 +1,5 @@
 package com.elo7.mars.domains;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -10,26 +9,20 @@ public class Mars {
 
     private final Map<UUID, Rover> roverMap = new HashMap<>();
 
-    private final ArrayList<ArrayList<Rover>> map;
+    private final Map<Point, Rover> pointMap = new HashMap<>();
 
     private final Integer limitX;
 
     private final Integer limitY;
 
     public Mars(final Integer limitX, final Integer limitY) {
-        final ArrayList<ArrayList<Rover>> y = new ArrayList<>(limitY);
-        for(int i = 0; i <= limitY; i++) {
-            y.add(createX(limitX));
-        }
-
-        this.map = y;
         this.limitX = limitX;
         this.limitY = limitY;
     }
 
     public Optional<Rover> findRoverAt(final Point point) {
         isValidPoint(point);
-        return Optional.ofNullable(map.get(point.getY()).get(point.getX()));
+        return Optional.ofNullable(pointMap.get(point));
     }
 
     public Optional<Rover> findRoverByUuid(final UUID uuid) {
@@ -38,8 +31,13 @@ public class Mars {
 
     public Rover insertAt(final Rover rover) {
         isValidPoint(rover.getPosition().getPoint());
+        pointMap.put(rover.getPosition().getPoint(), rover);
         roverMap.put(rover.getUuid(), rover);
-        return map.get(rover.getPosition().getPoint().getY()).set(rover.getPosition().getPoint().getX(), rover);
+        return rover;
+    }
+
+    public Rover removeAt(final Rover rover) {
+        return pointMap.remove(rover.getPosition().getPoint());
     }
 
     private void isValidPoint(final Point point) {
@@ -47,15 +45,5 @@ public class Mars {
             throw new IllegalArgumentException();
         }
     }
-
-
-    private ArrayList<Rover> createX(final Integer limitX) {
-        final ArrayList<Rover> x = new ArrayList<>(limitX);
-        for (int i = 0; i <= limitX; i++) {
-            x.add(null);
-        }
-        return x;
-    }
-
 
 }

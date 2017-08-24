@@ -1,5 +1,6 @@
 package com.elo7.mars.usecases;
 
+import com.elo7.mars.domains.Mars;
 import com.elo7.mars.domains.commands.Command;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,9 +13,12 @@ public class CommandBuilderTest {
 
     private CommandBuilder commandBuilder;
 
+    private Mars mars;
+
     @Before
     public void setUp() {
-        commandBuilder = new CommandBuilder();
+        mars = new Mars(10, 10);
+        commandBuilder = new CommandBuilder(mars);
     }
 
     @Test

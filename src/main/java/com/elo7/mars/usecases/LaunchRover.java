@@ -23,8 +23,8 @@ public class LaunchRover {
 
     public Rover launch(final Position position) {
         final Rover rover = new Rover(UUID.randomUUID(), position);
-        final Command command = new LauchCommand();
-        command.execute(rover, mars);
+        final Command command = new LauchCommand(mars);
+        command.execute(rover);
 
         return rover;
     }

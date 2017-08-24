@@ -35,7 +35,7 @@ public class MoveRoverTest {
         mars.insertAt(rover);
 
         final Collection<Command> commands = new ArrayList<>();
-        commands.add(new MoveCommand());
+        commands.add(new MoveCommand(mars));
 
         moveRover.move(rover.getUuid(), commands);
         Assert.assertEquals(new Position(0, 1, "N"), rover.getPosition());
@@ -48,7 +48,7 @@ public class MoveRoverTest {
 
         final Collection<Command> commands = new ArrayList<>();
         commands.add(new TurnRightCommand());
-        commands.add(new MoveCommand());
+        commands.add(new MoveCommand(mars));
 
         moveRover.move(rover.getUuid(), commands);
         Assert.assertEquals(new Position(1, 0, "E"), rover.getPosition());
@@ -61,8 +61,8 @@ public class MoveRoverTest {
 
         final Collection<Command> commands = new ArrayList<>();
         commands.add(new TurnRightCommand());
-        commands.add(new MoveCommand());
-        commands.add(new MoveCommand());
+        commands.add(new MoveCommand(mars));
+        commands.add(new MoveCommand(mars));
         commands.add(new TurnLeftCommand());
 
         moveRover.move(rover.getUuid(), commands);
@@ -75,7 +75,7 @@ public class MoveRoverTest {
 
         final Collection<Command> commands = new ArrayList<>();
         commands.add(new TurnRightCommand());
-        commands.add(new MoveCommand());
+        commands.add(new MoveCommand(mars));
 
         moveRover.move(rover.getUuid(), commands);
     }

@@ -24,7 +24,7 @@ public class MoveRover {
     public Rover move(final UUID uuid, final Collection<Command> commands) {
         final Rover rover = mars.findRoverByUuid(uuid).orElseThrow(() -> new RouverNotFoundException(uuid));
         commands.forEach(command -> {
-            command.execute(rover, mars);
+            command.execute(rover);
         });
 
         return rover;

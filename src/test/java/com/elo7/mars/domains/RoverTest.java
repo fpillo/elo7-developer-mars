@@ -72,43 +72,39 @@ public class RoverTest {
     }
 
     @Test
-    public void test_walk_looking_to_n() throws Exception {
+    public void test_move_looking_to_n() throws Exception {
         final Mars mars = new Mars(5,5);
         final Rover rover = new Rover(UUID.randomUUID(), new Position(0, 0, "N"));
-        rover.walk(mars);
+        rover.move(mars);
 
         Assert.assertEquals(new Position(0, 1, "N"), rover.getPosition());
     }
 
     @Test
-    public void test_walk_looking_to_e() throws Exception {
+    public void test_move_looking_to_e() throws Exception {
         final Mars mars = new Mars(5,5);
         final Rover rover = new Rover(UUID.randomUUID(), new Position(0, 0, "E"));
-        rover.walk(mars);
+        rover.move(mars);
 
         Assert.assertEquals(new Position(1, 0, "E"), rover.getPosition());
     }
 
     @Test
-    public void test_walk_looking_to_s() throws Exception {
+    public void test_move_looking_to_s() throws Exception {
         final Mars mars = new Mars(5,5);
         final Rover rover = new Rover(UUID.randomUUID(), new Position(0, 1, "S"));
-        rover.walk(mars);
+        rover.move(mars);
 
         Assert.assertEquals(new Position(0, 0, "S"), rover.getPosition());
     }
 
     @Test
-    public void test_walk_looking_to_w() throws Exception {
+    public void test_move_looking_to_w() throws Exception {
         final Mars mars = new Mars(5,5);
         final Rover rover = new Rover(UUID.randomUUID(), new Position(1, 0, "W"));
-        rover.walk(mars);
+        rover.move(mars);
 
         Assert.assertEquals(new Position(0, 0, "W"), rover.getPosition());
-    }
-
-    private Mars createMars(final Integer limitX, final Integer limitY) {
-        return new Mars(limitX, limitY);
     }
 
 }

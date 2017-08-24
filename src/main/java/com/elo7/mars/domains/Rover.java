@@ -35,7 +35,7 @@ public class Rover {
         return position;
     }
 
-    public Position walk(final Mars mars) {
+    public Position move(final Mars mars) {
         final Position newPosition = calculateNewPosition();
         position = newPosition;
         mars.insertAt(this);

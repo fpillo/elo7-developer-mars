@@ -7,7 +7,7 @@ public class MoveCommand implements Command {
 
     @Override
     public void execute(final Rover rover, final Mars mars) {
-        rover.walk(mars);
+        rover.move(mars);
     }
 
     @Override

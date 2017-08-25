@@ -12,7 +12,7 @@ import lombok.Getter;
 @Getter
 public class Mars {
 
-    private final Map<UUID, Rover> roverMap = new HashMap<>();
+    private Map<UUID, Rover> roverMap;
 
     private Rover [][] plane;
 
@@ -51,6 +51,7 @@ public class Mars {
     }
 
     private void setUp(final Integer limitX, final Integer limitY) {
+        this.roverMap = new HashMap<>();
         this.limitX = limitX;
         this.limitY = limitY;
         this.plane = new Rover[limitX + 1][limitY + 1];

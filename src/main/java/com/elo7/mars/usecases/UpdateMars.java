@@ -15,9 +15,8 @@ public class UpdateMars {
         this.mars = mars;
     }
 
-    public void update(final Integer x, final Integer y) {
-
+    public Mars update(final Integer x, final Integer y) {
+        return mars.update(x, y);
     }
-
 
 }

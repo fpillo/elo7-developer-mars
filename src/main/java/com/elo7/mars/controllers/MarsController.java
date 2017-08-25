@@ -3,12 +3,13 @@ package com.elo7.mars.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elo7.mars.controllers.json.MarsJson;
+import com.elo7.mars.domains.Mars;
 import com.elo7.mars.usecases.UpdateMars;
 
 @RestController
@@ -21,11 +22,10 @@ public class MarsController {
         this.updateMars = updateMars;
     }
 
-    @PostMapping(value = "/mars", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
-    public MarsJson create(@RequestBody final MarsJson marsJson) {
-        updateMars.update(marsJson.getX(), marsJson.getY());
-        return marsJson;
+    @PutMapping(value = "/mars", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public Mars create(@RequestBody final MarsJson marsJson) {
+        return updateMars.update(marsJson.getX(), marsJson.getY());
     }
 
 

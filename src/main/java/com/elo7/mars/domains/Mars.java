@@ -5,20 +5,21 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import lombok.Getter;
+
+@Getter
 public class Mars {
 
     private final Map<UUID, Rover> roverMap = new HashMap<>();
 
     private Rover [][] plane;
 
-    private final Integer limitX;
+    private Integer limitX;
 
-    private final Integer limitY;
+    private Integer limitY;
 
     public Mars(final Integer limitX, final Integer limitY) {
-        this.limitX = limitX;
-        this.limitY = limitY;
-        this.plane = new Rover[limitX + 1][limitY + 1];
+        setUp(limitX, limitY);
     }
 
     public Optional<Rover> findRoverAt(final Point point) {
@@ -40,6 +41,17 @@ public class Mars {
     public Rover removeAt(final Rover rover) {
         plane[rover.getPosition().getPoint().getX()][rover.getPosition().getPoint().getY()] = null;
         return roverMap.remove(rover);
+    }
+
+    public Mars update(final Integer limitX, final Integer limitY) {
+        setUp(limitX, limitY);
+        return this;
+    }
+
+    private void setUp(final Integer limitX, final Integer limitY) {
+        this.limitX = limitX;
+        this.limitY = limitY;
+        this.plane = new Rover[limitX + 1][limitY + 1];
     }
 
     private void isValidPoint(final Point point) {

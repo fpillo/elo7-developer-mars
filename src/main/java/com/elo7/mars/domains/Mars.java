@@ -9,7 +9,7 @@ public class Mars {
 
     private final Map<UUID, Rover> roverMap = new HashMap<>();
 
-    private final Map<Point, Rover> pointMap = new HashMap<>();
+    private Rover [][] plane;
 
     private final Integer limitX;
 
@@ -18,11 +18,12 @@ public class Mars {
     public Mars(final Integer limitX, final Integer limitY) {
         this.limitX = limitX;
         this.limitY = limitY;
+        this.plane = new Rover[limitX + 1][limitY + 1];
     }
 
     public Optional<Rover> findRoverAt(final Point point) {
         isValidPoint(point);
-        return Optional.ofNullable(pointMap.get(point));
+        return Optional.ofNullable(plane[point.getX()][point.getY()]);
     }
 
     public Optional<Rover> findRoverByUuid(final UUID uuid) {
@@ -31,14 +32,14 @@ public class Mars {
 
     public Rover insertAt(final Rover rover) {
         isValidPoint(rover.getPosition().getPoint());
-        pointMap.put(rover.getPosition().getPoint(), rover);
+        plane[rover.getPosition().getPoint().getX()][rover.getPosition().getPoint().getY()] = rover;
         roverMap.put(rover.getUuid(), rover);
         return rover;
     }
 
     public Rover removeAt(final Rover rover) {
-        roverMap.remove(rover);
-        return pointMap.remove(rover.getPosition().getPoint());
+        plane[rover.getPosition().getPoint().getX()][rover.getPosition().getPoint().getY()] = null;
+        return roverMap.remove(rover);
     }
 
     private void isValidPoint(final Point point) {

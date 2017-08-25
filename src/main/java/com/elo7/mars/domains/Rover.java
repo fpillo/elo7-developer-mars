@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.elo7.mars.exceptions.CollisionException;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +37,7 @@ public class Rover {
 
     public Position launch(final Mars mars) {
         if (hasCollision(mars, position)) {
-            throw new CollisionException();
+            throw new CollisionException(position.getPoint());
         }
 
         mars.insertAt(this);
@@ -46,7 +47,7 @@ public class Rover {
     public Position move(final Mars mars) {
         final Position newPosition = calculateNewPosition();
         if (hasCollision(mars, newPosition)) {
-            throw new CollisionException();
+            throw new CollisionException(position.getPoint());
         }
 
         mars.removeAt(this);

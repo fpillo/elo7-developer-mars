@@ -5,6 +5,8 @@ import java.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.elo7.mars.exceptions.InvalidPointException;
+
 public class MarsTest {
 
     @Test
@@ -30,7 +32,7 @@ public class MarsTest {
         mars.insertAt(rover);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidPointException.class)
     public void test_insertAt_invalid_point() throws Exception {
         final Mars mars = createMars(5, 4);
         final Rover rover = new Rover(UUID.randomUUID(), new Position(6, 4, "N"));

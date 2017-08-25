@@ -11,6 +11,7 @@ import com.elo7.mars.domains.Point;
 import com.elo7.mars.domains.Position;
 import com.elo7.mars.domains.Rover;
 import com.elo7.mars.exceptions.CollisionException;
+import com.elo7.mars.exceptions.InvalidPointException;
 
 public class LaunchRoverTest {
 
@@ -30,7 +31,7 @@ public class LaunchRoverTest {
         Assert.assertTrue(mars.findRoverAt(new Point(10, 10)).isPresent());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidPointException.class)
     public void test_launch_invalid_position() {
         launchRover.launch(new Position(11, 10, "N"));
     }

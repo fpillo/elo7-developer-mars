@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.elo7.mars.exceptions.InvalidPointException;
+
 import lombok.Getter;
 
 @Getter
@@ -56,7 +58,7 @@ public class Mars {
 
     private void isValidPoint(final Point point) {
         if (point.getY() < 0 || point.getX() < 0 || point.getY() > limitY || point.getX() > limitX) {
-            throw new IllegalArgumentException();
+            throw new InvalidPointException(point);
         }
     }
 

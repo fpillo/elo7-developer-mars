@@ -24,7 +24,7 @@ public class MarsController {
 
     @PutMapping(value = "/mars", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public Mars create(@RequestBody final MarsJson marsJson) {
+    public Mars update(@RequestBody final MarsJson marsJson) {
         return updateMars.update(marsJson.getX(), marsJson.getY());
     }
 
